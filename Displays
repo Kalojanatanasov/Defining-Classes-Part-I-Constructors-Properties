@@ -1,0 +1,31 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task12
+{
+    class Displays // create a display class (instead of calculating numbers we sugest that the inforamtion of the
+                   // display is only read-only information so better for this reason to be string because you can't 
+    {              // manipulate the screen dimesion and colors of the phone (it HD limitation))
+        private string sizeSideA;
+        private string sizeSideB;
+        private string colorNumber;
+
+        public string SizeSideA
+        {
+            get { return this.sizeSideA; }
+            set { this.sizeSideA = value; }
+        }
+        public string SizeSideB
+        {
+            get { return this.sizeSideB; }
+            set { this.sizeSideB = value; }
+        }
+        public string ColorNumber
+        {
+            get { return this.colorNumber; }
+            set { this.colorNumber = value; }
+        }
+    }
+}
