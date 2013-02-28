@@ -1,0 +1,140 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task12
+{
+    class GSMs
+    {
+        //Add a method that calculates the total price of the calls in the call history.
+        //Assume the price per minute is fixed and is provided as a parameter.
+
+        public Battery Battery = new Battery();
+        public Displays Displays = new Displays();
+        public Call Calls = new Call();
+        private List<Call> callHistory;
+      //  private float pricecall; //if we need to change the price
+
+        private string model;
+        private string manifacturer;
+        private string price;
+        private string owner;
+        private string gsm;
+
+      //  public float Pricecall // constructor of the price
+     //   {
+     //       set { this.pricecall = value; }
+    //        get { return this.Pricecall; }
+    //    }
+
+        public GSMs()
+        {
+            this.model = null;
+            this.manifacturer = null;
+            this.price = null;
+            this.owner = null;
+            this.callHistory = new List<Call>();
+        }
+
+        private static GSMs iPhone4S;
+
+        public static GSMs IPhone4S
+        {
+            get { return iPhone4S; }
+        }
+
+        static GSMs()
+        {
+
+            iPhone4S = new GSMs();
+            iPhone4S.Model = "Iphone4S";
+            iPhone4S.Manifacturer = "Apple ";
+            iPhone4S.Owner = " Who Care ";
+            iPhone4S.Price = "1200 ";
+            iPhone4S.Battery = new Battery();
+            iPhone4S.Battery.Houridle = "1 ";
+            iPhone4S.Battery.Hourtalk = "1 ";
+          //iPhone4S. = Battery.Batmodel.Li_air;
+            iPhone4S.Displays = new Displays();
+            iPhone4S.Displays.ColorNumber = "124453 ";
+            iPhone4S.Displays.SizeSideA = " 40";
+            iPhone4S.Displays.SizeSideB = "60";
+            
+        }
+
+        public enum Currensy
+        {
+            BGL, USD, BRP, Euro, CAD, RUR, CHJ, JAP
+        }
+
+        //static public List<Call> CallHistory = new List<Call>();
+
+        public List<Call> CallHistory
+        {
+            get { return callHistory; }
+            set { callHistory = value; }
+        }
+
+        public string Model
+        {
+            get { return this.model; }
+            set { this.model = value; }
+        }
+        public string Manifacturer
+        {
+            get { return this.manifacturer; }
+            set { this.manifacturer = value; }
+        }
+        public string Price
+        {
+            get { return this.price; }
+            set { this.price = value; }
+        }
+        public string Owner
+        {
+            get { return this.owner; }
+            set { this.owner = value; }
+        }
+
+        public override string ToString()
+        {
+            return gsm = "owner is" + this.Owner + "with model " + this.Model + " with price" + GSMs.Currensy.BGL + " " + this.Price + " produced by " + this.Manifacturer +
+                Environment.NewLine + "with battery type: " + Battery.Batmodel.Li_air + " and with display size" + this.Displays.SizeSideA + "x" + this.Displays.SizeSideB + " with " + this.Displays.ColorNumber + "colors";
+        }
+
+        internal static void Removecall(GSMs mobiphone2, int temp)
+        { // commented some part of the program when you remove not longest but this what you want
+           // Console.WriteLine("PLease input index of the calls that must be removed:");
+          //  int temp1 = int.Parse(Console.ReadLine());
+          //  if (temp1 <= temp)
+          //  {
+                mobiphone2.CallHistory.RemoveAt(temp - 1);
+         //   }
+         //   else
+        //    {
+        //        throw new ArgumentOutOfRangeException("The inputed value is high that expected number of the calls");
+         //   }
+        }
+
+        internal static void AddCall(GSMs mobiphone)
+        {
+            mobiphone.Calls = new Call();
+            Console.WriteLine("Please specify number");
+            mobiphone.Calls.Number = Console.ReadLine();
+            Console.WriteLine("Please duaration of the call:");
+            mobiphone.Calls.Talkduration = int.Parse(Console.ReadLine());
+            // Console.WriteLine("PLease specify the date of phonetalk:");
+            //DateTime timesss = new DateTime();                
+            mobiphone.Calls.Times = new DateTime();
+            mobiphone.CallHistory.Add(mobiphone.Calls);
+        }
+
+        internal static void ClearCallHistory(GSMs mobiphone2, int count)
+        {
+            mobiphone2.CallHistory.RemoveRange(0, count);
+            
+        }   
+    }
+}
+
