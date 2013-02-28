@@ -1,0 +1,37 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Task12
+{
+   public class Battery
+    {
+       
+
+       // private string batmodel; //if we manually want to add some baterry model (must add also some code in others files)
+        private string houridle;
+        private string hourtalk;
+     
+       public enum Batmodel // the Baterry is mandatory to be enum even better is to be interface implemented
+       {
+           Li_ion, Potassium_ion, NiMn, NiCd, Li_air, LiPo 
+       }
+
+      //  public string Batmodel // constructor of the battery
+     //   {
+      //      get { return this.batmodel; }
+      //      set { this.batmodel = value; }
+      //  }
+        public string Houridle
+        {
+            get { return this.houridle; }
+            set { this.houridle = value; }
+        }
+        public string Hourtalk
+        {
+            get { return this.hourtalk; }
+            set { this.hourtalk = value; }
+        }
+    }
+}
