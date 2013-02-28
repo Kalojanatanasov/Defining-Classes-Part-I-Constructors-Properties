@@ -1,0 +1,102 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Diagnostics;
+using System.Text;
+
+namespace Task12
+{
+    class GSMtest
+    {
+        static void Main()
+        {
+            // Write a class GSMCallHistoryTest to test the call history functionality of the GSM class.
+            //Create an instance of the GSM class.
+            // Add few calls.
+            // Display the information about the calls.
+            // Assuming that the price per minute is 0.37 calculate and print the total price of the calls in the history.
+            // Remove the longest call from the history and calculate the total price again.
+            // Finally clear the call history and print it.
+
+
+
+            Console.WriteLine("Please input number of phones (for test choose small number in example 3)");
+            int temp = int.Parse(Console.ReadLine());
+            GSMs[] mobiphone = new GSMs[temp]; // creation of array of GSM objects
+            for (int i = 0; i < temp; i++)
+            {
+                decimal pricecall = 0.37m;
+                mobiphone[i] = new GSMs();
+                MobiphneCreation(mobiphone[i]);
+                Console.WriteLine("Please input number of calls:");
+                int temp1 = int.Parse(Console.ReadLine()); //foreach GSM we add number of calls
+                for (int j = 0; j < temp1; j++)
+                {
+                    GSMs.AddCall(mobiphone[i]);
+                }
+                foreach (var item in mobiphone[i].CallHistory)
+                {
+                    Console.WriteLine(item); // and print them
+                }
+                decimal sum = 0;
+                sum = PriceofAllCalls(mobiphone[i], pricecall, sum); // calculation of the sum
+                Console.WriteLine("The sum of all calls is: {0}", sum);
+                           
+              
+            mobiphone[i].CallHistory = mobiphone[i].CallHistory.OrderBy(x  => x.Talkduration).ToList(); // sorting list
+//to find the longest call
+
+        
+                GSMs.Removecall(mobiphone[i], temp1); // and to remove it
+                int count = mobiphone[i].CallHistory.Count;
+                sum = 0.0m;
+                sum = PriceofAllCalls(mobiphone[i], pricecall, sum);
+                Console.WriteLine("The new sum of all calls (after delete of longest one) is: {0}", sum);
+                GSMs.ClearCallHistory(mobiphone[i], count); // clear the CallHIstory
+                count = mobiphone[i].CallHistory.Count;
+                if (count == 0)
+                {
+                    Console.WriteLine("The callHIstory are succesfully cleared");
+                }
+                else
+                    Console.WriteLine("Call history is not cleared :( - quite sorry");
+            }
+        }
+
+
+
+
+        private static decimal PriceofAllCalls(GSMs mobiphone, decimal pricecall, decimal sum)
+        {
+            foreach (var item in mobiphone.CallHistory)
+            {
+                sum += item.Talkduration * pricecall;
+            }
+            return sum;
+        }
+
+        private static void MobiphneCreation(GSMs mobiphone)
+        {
+            Console.WriteLine("Please insert mobiphone Owner name:");
+            mobiphone.Owner = Console.ReadLine();
+
+            Console.WriteLine("Please insert mobiphone model:");
+            mobiphone.Model = Console.ReadLine();
+            Console.WriteLine("Please insert mobiphone vendor:");
+            mobiphone.Manifacturer = Console.ReadLine();
+            Console.WriteLine("Please insert mobiphone price:");
+            mobiphone.Price = Console.ReadLine();
+            Console.WriteLine("Please insert how many hour has been talk:");
+            mobiphone.Battery.Hourtalk = Console.ReadLine();
+            Console.WriteLine("Please insert how many hour has been idle:");
+            mobiphone.Battery.Houridle = Console.ReadLine();
+            Console.WriteLine("Please insert display width and heigth:");
+            mobiphone.Displays.SizeSideA = Console.ReadLine();
+            mobiphone.Displays.SizeSideB = Console.ReadLine();
+            Console.WriteLine("Please insert display how many colors has the described display:");
+            mobiphone.Displays.ColorNumber = Console.ReadLine();
+            Console.Clear();
+        }
+
+    }
+}
