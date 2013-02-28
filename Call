@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Diagnostics;
+
+namespace Task12
+{
+    class Call
+    {
+        //Add methods in the GSM class for adding and deleting calls from the calls history.
+        //Add a method to clear the call history.
+
+        ///<summary>
+        /// Start time, end time, dialedphone, durations
+        ///</summary>
+ //talkduration is in seconds
+
+        private DateTime times;
+        private string number;
+        private int talkduration;
+        private string call;
+       
+
+        public DateTime RandomDay()
+        {
+            DateTime start = new DateTime(2013, 1, 1);
+            Random gen = new Random();
+            int range = ((TimeSpan)(DateTime.Today - start)).Days;
+            return start.AddDays(gen.Next(range));
+        }
+
+        public Call()
+        {
+            this.times = DateTime.Now;
+            this.number = null;
+            this.talkduration = 0;
+           
+        }
+
+        public DateTime Times
+        {
+            get { return this.times; }
+            set {
+                value = RandomDay();                
+                this.times = value; }
+        }
+        public string Number
+        {
+            get { return this.number; }
+            set {
+                if (value.Length < 3)
+                { 
+                    throw new ArgumentOutOfRangeException("The phone number is always more than 3 symbols"); 
+                }
+                else
+                    this.number = value; 
+                }
+        }
+
+        public int Talkduration
+        {
+            get { return this.talkduration; }
+            set {
+                if (value >= 3600) 
+                { throw new ArgumentOutOfRangeException("The call longer than 3600s is dropped by the network"); }
+                 else
+                    this.talkduration = value; 
+                }
+            }
+
+       public override string ToString()
+        {
+            return call = "On date: " + Times + " we talk with " + Number + " with duration " + Talkduration +"s";
+        }
+
+      
+        }
+     }
